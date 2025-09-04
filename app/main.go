@@ -22,11 +22,13 @@ func main() {
 		os.Exit(1)
 	}
 	// Accepting connection
-	_, err = l.Accept()
+	conn, err := l.Accept()
 	if err != nil {
 		fmt.Println("There has been an error accepting the connection", err.Error())
 		os.Exit(1)
 	}
+	var message = []byte("+PONG\r\n")
+	conn.Write(message)
 	// l, err := net.Listen("tcp", "0.0.0.0:6379")
 	// if err != nil {
 	// 	fmt.Println("Failed to bind to port 6379")
